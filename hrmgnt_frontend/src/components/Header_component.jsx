@@ -8,6 +8,8 @@ function Header_component() {
                 <Link to="/">Home</Link>
                 <Link to="/about">About Us</Link>
                 <Link to="/contact">Contact Us</Link>
+                <Link to="/login">Login</Link>
+                <Link to="/register">Register</Link>
             </div>
         </div>
     )
