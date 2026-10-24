@@ -9,13 +9,24 @@ function Register() {
 
     const navigate = useNavigate();
 
-    const handleRegister = (event) => {
+    let handleRegister = async (event) => {
         event.preventDefault();
 
-        console.log({ name, emailId, password, role });
-
-        alert("Registered Successfully");
-        navigate("/login");
+        let res = await fetch('http://localhost:7000/api/emp/register',
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, emailId, password, role })
+            }
+        )
+        let data = await res.json()
+        if (res.ok) {
+            console.log("Data registered Success")
+            console.log(data);
+        } else {
+            console.log("Data insertion FAILED")
+            console.log(data);
+        }
     };
 
     return (
@@ -52,7 +63,7 @@ function Register() {
                     value={role}
                     onChange={(e) => setRole(e.target.value)}
                 >
-                    <option value="Employee">Employee</option>
+                    <option value="EMPLOYEE">Employee</option>
                     <option value="HR">HR</option>
                 </select>
                 <br />

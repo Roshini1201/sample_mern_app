@@ -1,9 +1,11 @@
 let express=require('express');
 let app=express();
+let cors = require('cors');
 
 let hrroutes=require('./routes/hr_routes');
 let emproutes=require('./routes/emp_routes');
 
+app.use(cors())
 app.use(express.json());
 
 const { default: mongoose } = require('mongoose');
