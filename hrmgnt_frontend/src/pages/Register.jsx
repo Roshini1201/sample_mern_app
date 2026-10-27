@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function Register() {
     const [name, setName] = useState("");
-    const [emailId, setEmailId] = useState("");
+    const [email, setemail] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("Employee");
 
@@ -16,7 +16,7 @@ function Register() {
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, emailId, password, role })
+                body: JSON.stringify({ name, email, password, role })
             }
         )
         let data = await res.json()
@@ -43,8 +43,8 @@ function Register() {
 
                 <input
                     type="email"
-                    value={emailId}
-                    onChange={(e) => setEmailId(e.target.value)}
+                    value={email}
+                    onChange={(e) => setemail(e.target.value)}
                     placeholder="Enter email ID"
                     required
                 />

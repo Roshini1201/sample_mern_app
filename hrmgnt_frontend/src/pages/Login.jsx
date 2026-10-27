@@ -3,19 +3,28 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-    const [emailId, setEmailId] = useState("");
+    const [email, setemail] = useState("");
     const [password, setPassword] = useState("");
 
     let navigate = useNavigate()
-    let [error,setError]=useState("")
+    let [error, setError] = useState("")
 
-    let handleLogin = (event) => {
+    let handleLogin = async (event) => {
         event.preventDefault()
-        if (emailId == 'admin@gmail.com' && password == 'admin') {
+        if (email === 'admin@gmail.com' && password === 'admin') {
             // console.log('login success')
-            navigate("/userHome")
+            setError("")
+            navigate("/adminhome")
         } else {
-            setError("Login Failed- Invalid Credentials")
+            let req = await fetch("http://localhost:7000/api/emp/login", {
+                method: "POST",
+                header: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            }
+            );
+            let data = await req.json()
+            console.log(data)
+            // setError("Login Failed- Invalid Credentials")
         }
     }
 
@@ -24,8 +33,8 @@ function Login() {
             <form onSubmit={handleLogin}>
                 <input
                     type="mail"
-                    value={emailId}
-                    onChange={(e) => setEmailId(e.target.value)}
+                    value={email}
+                    onChange={(e) => setemail(e.target.value)}
                     placeholder="Enter email ID">
                 </input><br />
                 <input
